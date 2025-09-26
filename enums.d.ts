@@ -38,5 +38,7 @@
     //% block="Red & Infrared" enumval=3
     RedAndIR = 3,
     }
+declare namespace dfrBloodOxygen {
+}
 
 // Auto-generated. Do not edit. Really.
