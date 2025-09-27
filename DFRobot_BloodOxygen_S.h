@@ -17,7 +17,7 @@
 #define I2C_MODE 1
 #define UART_MODE 2
 
-#define DEV_ADDRESS 0x0D
+#define DEV_ADDRESS 0x57
 
 class DFRobot_BloodOxygen_S
 {
