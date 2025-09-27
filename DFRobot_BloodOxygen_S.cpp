@@ -99,6 +99,7 @@ DFRobot_BloodOxygen_S_I2C::~DFRobot_BloodOxygen_S_I2C(void){}
 
 bool DFRobot_BloodOxygen_S_I2C::begin(void)
 {
+    uBit.serial.baud(115200);
     if(pxt::uBit.i2c.write(this->_I2C_addr, NULL, 0) != MICROBIT_OK){
         return false;
     }
@@ -120,11 +121,18 @@ void DFRobot_BloodOxygen_S_I2C::writeReg(uint16_t reg_addr, uint8_t *data_buf, u
 int16_t DFRobot_BloodOxygen_S_I2C::readReg(uint16_t reg_addr, uint8_t *data_buf, uint8_t len)
 {
     uint8_t reg = (uint8_t)reg_addr;
+    int16_t ret;
 #if MICROBIT_CODAL
     pxt::uBit.i2c.write(this->_I2C_addr, &reg, 1, true);
-    return pxt::uBit.i2c.read(this->_I2C_addr, data_buf, len);
+    ret = pxt::uBit.i2c.read(this->_I2C_addr, data_buf, len);
 #else
     pxt::uBit.i2c.write(this->_I2C_addr, (const char*)&reg, 1, true);
-    return pxt::uBit.i2c.read(this->_I2C_addr, (char*)data_buf, len);
+    ret = pxt::uBit.i2c.read(this->_I2C_addr, (char*)data_buf, len);
 #endif
+    uBit.serial.printf("reg: 0x%x data: ", reg_addr);
+    for (int i = 0; i < len; i++) {
+        uBit.serial.printf("%d ", data_buf[i]);
+    }
+    uBit.serial.printf("\r\n");
+    return ret;
 }
