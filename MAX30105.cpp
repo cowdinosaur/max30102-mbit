@@ -761,7 +761,7 @@ bool MAX30105::checkForBeat(uint32_t sample)
     IR_AC_Signal_max = 0;
 
     //if ((IR_AC_Max - IR_AC_Min) > 100 & (IR_AC_Max - IR_AC_Min) < 1000)
-    if (((IR_AC_Max - IR_AC_Min) > 20) && ((IR_AC_Max - IR_AC_Min) < 1000))
+    if (((IR_AC_Max - IR_AC_Min) > 10) && ((IR_AC_Max - IR_AC_Min) < 1000))
     {
 	  placeholder++;
       beatDetected = true;
